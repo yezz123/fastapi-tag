@@ -1,18 +1,17 @@
+from app._base import app
+from base.model import Metadata, Problem
 from fastapi import FastAPI, Request
 from fastapi.encoders import jsonable_encoder
-from fastapi.responses import JSONResponse
 from fastapi.exception_handlers import RequestValidationError
-from starlette.exceptions import HTTPException
-
-from base.model import Problem, Metadata
+from fastapi.responses import JSONResponse
 from router.routers import RouteGenerator
-from app._base import app
+from starlette.exceptions import HTTPException
 
 
 async def from_validation_error(_request: Request, exc: RequestValidationError):
     """
     from_validation_error function is used to handle validation error.
-    
+
     Args:
         _request (Request): Request object
         exc (RequestValidationError): RequestValidationError object
@@ -20,14 +19,16 @@ async def from_validation_error(_request: Request, exc: RequestValidationError):
     Returns:
         JSONResponse: JSONResponse object
     """
-    body = jsonable_encoder(Problem(title="Validation error", status=400, detail=exc.errors()))
+    body = jsonable_encoder(
+        Problem(title="Validation error", status=400, detail=exc.errors())
+    )
     return JSONResponse(status_code=400, content=body)
 
 
 async def from_http_exception(_request: Request, exc: HTTPException):
     """
     from_http_exception function is used to handle HTTPException error.
-    
+
     Args:
         _request (Request): Request object
         exc (HTTPException): HTTPException object
@@ -43,14 +44,15 @@ async def from_http_exception(_request: Request, exc: HTTPException):
 class Application(FastAPI):
     """
     Class Application is a FastAPI class that is used to create API application.
-    
+
     Args:
         FastAPI object
     """
+
     def __init__(self, root: str, metadata: Metadata, **kwargs):
         """
         __init__ function is used to initialize Application class.
-        
+
         Args:
             root (str): API root
             metadata (Metadata): Metadata object
@@ -77,7 +79,7 @@ class Application(FastAPI):
     def openapi(self):
         """
         openapi function is used to show OpenAPI specification.
-        
+
         Returns:
             JSONResponse: JSONResponse object
         """
