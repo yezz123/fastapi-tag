@@ -1,3 +1,11 @@
 fastapi
 starlette
 pydantic
+mock
+pytest
+coverage
+pylint
+mypy
+mypy-extensions
+requests
+requests-toolbelt
