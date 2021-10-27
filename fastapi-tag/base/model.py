@@ -27,3 +27,52 @@ class Problem(BaseModel):
         """
         kwargs.pop("exclude_unset")
         return super().dict(*args, exclude_unset=True, **kwargs)
+
+
+class Version(BaseModel):
+    """
+    Version model
+    
+    Args:
+        BaseModel (): BaseModel
+    """
+    app: str
+    api: str
+
+
+class Contact(BaseModel):
+    """
+    Contact model
+    
+    Args:
+        BaseModel (): BaseModel
+
+    Returns:
+        Contact: Contact model
+    """
+    name: Optional[str]
+    url: Optional[str]
+    email: Optional[str]
+
+    def dict(self, *args, **kwargs):
+        """
+        dict method
+        Returns:
+            dict: dict
+        """
+        kwargs.pop("exclude_unset")
+        return super().dict(*args, exclude_unset=True, **kwargs)
+
+class Metadata(BaseModel):
+    """
+    Metadata model
+    
+    Args:
+        BaseModel (): BaseModel
+    """
+    title: str
+    version: Version
+    description: Optional[str]
+    contact: Contact
+    api_id: str
+    audience: str
