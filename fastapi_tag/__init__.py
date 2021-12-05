@@ -6,8 +6,10 @@ __version__ = "0.0.1"
 
 __author__ = "Yasser Tahiri"
 
-from app.app import *
-from base.model import *
-from meta.metadata import *
-from router.routers import *
-from utils.type import *
+import base
+import core
+import meta
+import router
+import utils
+
+__all__ = ["base", "core", "meta", "router", "utils"]

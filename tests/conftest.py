@@ -1,7 +1,8 @@
 import pytest
 from fastapi.testclient import TestClient
 
-from fastapi_tag import Application, Contact, Metadata, Version
+from fastapi_tag.base.model import Contact, Metadata, Version
+from fastapi_tag.core.application import Application
 
 
 @pytest.fixture

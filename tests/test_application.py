@@ -2,7 +2,8 @@ from fastapi.testclient import TestClient
 from pydantic import BaseModel
 from starlette.exceptions import HTTPException
 
-from fastapi_tag import Namespace, Problem, Resource
+from fastapi_tag.base.model import Problem
+from fastapi_tag.router.routers import Namespace, Resource
 
 route = Namespace([])
 

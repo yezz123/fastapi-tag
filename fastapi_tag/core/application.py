@@ -1,5 +1,5 @@
-from app._base import app
 from base.model import Metadata, Problem
+from core._base import app
 from fastapi import FastAPI, Request
 from fastapi.encoders import jsonable_encoder
 from fastapi.exception_handlers import RequestValidationError
