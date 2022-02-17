@@ -1,17 +1,19 @@
-from typing import Optional, Any
+from typing import Any, Optional
+
 from pydantic import BaseModel
 
 
 class Problem(BaseModel):
     """
     Problem model
-    
+
     Args:
         BaseModel: BaseModel
 
     Returns:
         Problem: Problem model
     """
+
     title: str
     status: int
     detail: Any
@@ -21,7 +23,7 @@ class Problem(BaseModel):
     def dict(self, *args, **kwargs):
         """
         dict method
-        
+
         Returns:
             dict: dict
         """
@@ -32,10 +34,11 @@ class Problem(BaseModel):
 class Version(BaseModel):
     """
     Version model
-    
+
     Args:
         BaseModel (): BaseModel
     """
+
     app: str
     api: str
 
@@ -43,13 +46,14 @@ class Version(BaseModel):
 class Contact(BaseModel):
     """
     Contact model
-    
+
     Args:
         BaseModel (): BaseModel
 
     Returns:
         Contact: Contact model
     """
+
     name: Optional[str]
     url: Optional[str]
     email: Optional[str]
@@ -63,13 +67,15 @@ class Contact(BaseModel):
         kwargs.pop("exclude_unset")
         return super().dict(*args, exclude_unset=True, **kwargs)
 
+
 class Metadata(BaseModel):
     """
     Metadata model
-    
+
     Args:
         BaseModel (): BaseModel
     """
+
     title: str
     version: Version
     description: Optional[str]

@@ -6,8 +6,6 @@ __version__ = "0.0.1"
 
 __author__ = "Yasser Tahiri"
 
-from app.application import *
-from base.model import *
-from meta.metadata import *
-from router.routers import *
-from utils.type import *
+from fastapi_tag import base, core, meta, router, utils
+
+__all__ = ["base", "core", "meta", "router", "utils"]

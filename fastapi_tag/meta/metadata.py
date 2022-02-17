@@ -2,8 +2,8 @@ import logging
 import subprocess
 from functools import lru_cache as cache
 
-
 log = logging.getLogger(__name__)
+
 
 @cache(maxsize=1)
 def read_app_version():
@@ -19,7 +19,7 @@ def read_app_version():
 def _read_version_from_file():
     """
     :returns: A string describing the version.
-    
+
     Returns:
         str: The version of the application.
     """
@@ -39,14 +39,16 @@ def _read_version_from_file():
 def _read_version_from_git():
     """
     :returns: A string describing the version.
-    
+
     Returns:
         str: The version of the application.
     """
     try:
         version = (
             subprocess.run(
-                ["git", "describe", "--always", "--tags"], stdout=subprocess.PIPE, check=False
+                ["git", "describe", "--always", "--tags"],
+                stdout=subprocess.PIPE,
+                check=False,
             )
             .stdout.decode("utf-8")
             .rstrip()

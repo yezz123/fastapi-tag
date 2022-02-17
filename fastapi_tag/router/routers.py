@@ -3,18 +3,18 @@ from enum import Enum, auto
 from itertools import chain
 from typing import Callable, Iterator, List, Optional, Tuple
 
-from fastapi.routing import APIRoute
 from fastapi.params import Depends
+from fastapi.routing import APIRoute
 from starlette.responses import JSONResponse
 
-from base.model import Problem
-from utils.type import get_return_type as type
+from fastapi_tag.base.model import Problem
+from fastapi_tag.utils.type import get_return_type as type
 
 
 class Verb(Enum):
     """
     Enum of HTTP verbs.
-    
+
     Args:
         Enum (Enum): Enum of HTTP verbs.
 
@@ -24,6 +24,7 @@ class Verb(Enum):
     Yields:
         Verb: HTTP verb.
     """
+
     GET = auto()
     PUT = auto()
     POST = auto()
@@ -40,7 +41,7 @@ class Verb(Enum):
     def handler_name(self):
         """
         handler_name is the name of the handler function.
-        
+
         Returns:
             str: Name of the handler function.
         """
@@ -50,10 +51,11 @@ class Verb(Enum):
 class RouteGenerator(ABC):
     """
     Abstract class for generating routes.
-    
+
     Args:
         ABC (ABC): Abstract class.
     """
+
     @abstractmethod
     def routes(self, tags=None, prefix=None, dependencies=None) -> Iterator[APIRoute]:
         # TODO Use a generator instead of a list.
@@ -63,21 +65,25 @@ class RouteGenerator(ABC):
 class Namespace(RouteGenerator):
     """
     Namespace.route is a decorator that adds a route generator to the namespace.
-    
+
     Args:
         RouteGenerator (RouteGenerator): Route generator.
 
     Returns:
         RouteGenerator: Route generator.
     """
+
     _children: List[RouteGenerator]
 
     def __init__(
-        self, tags=None, prefix: Optional[str] = None, dependencies: List[Depends] = None
+        self,
+        tags=None,
+        prefix: Optional[str] = None,
+        dependencies: List[Depends] = None,
     ):
         """
         __init__ is the constructor for Namespace.
-        
+
         Args:
             tags (List[str]): Tags.
             prefix (Optional[str]): Prefix.
@@ -95,10 +101,11 @@ class Namespace(RouteGenerator):
         """
         route is a decorator that adds a route generator to the namespace.
         """
+
         def decorator(cls):
             """
             decorator is a decorator that adds a route generator to the namespace.
-            
+
             Returns:
                 RouteGenerator: Route generator.
             """
@@ -111,13 +118,15 @@ class Namespace(RouteGenerator):
         tags = (self._tags or []) + (tags or [])
         prefix = "".join(s for s in [prefix, self._prefix] if s is not None)
         dependencies = (self._dependencies or []) + (dependencies or [])
-        return chain(*[child.routes(tags, prefix, dependencies) for child in self._children])
+        return chain(
+            *[child.routes(tags, prefix, dependencies) for child in self._children]
+        )
 
 
 class Resource(RouteGenerator):
     """
     _RESPONSES is a dictionary of HTTP status codes and their corresponding response class.
-    
+
     Args:
         RouteGenerator (RouteGenerator): Route generator.
 
@@ -127,6 +136,7 @@ class Resource(RouteGenerator):
     Yields:
         RouteGenerator: Route generator.
     """
+
     _RESPONSES = {"4XX": {"model": Problem}}
 
     def __init__(
@@ -137,7 +147,7 @@ class Resource(RouteGenerator):
     ):
         """
         __init__ is the constructor for Resource.
-        
+
         Args:
             prefix (Optional[str]): Prefix.
             tags (Optional[List[str]]): Tags.
@@ -159,7 +169,9 @@ class Resource(RouteGenerator):
         for (verb, handler) in self.handlers():
             yield self._route_from_handler(tags, prefix, verb, handler, dependencies)
 
-    def _route_from_handler(self, tags, prefix, verb: Verb, handler, dependencies) -> APIRoute:
+    def _route_from_handler(
+        self, tags, prefix, verb: Verb, handler, dependencies
+    ) -> APIRoute:
         kwargs = {
             "path": prefix,
             "methods": [verb.name],
