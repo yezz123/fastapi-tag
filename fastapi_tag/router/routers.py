@@ -3,11 +3,12 @@ from enum import Enum, auto
 from itertools import chain
 from typing import Callable, Iterator, List, Optional, Tuple
 
-from base.model import Problem
 from fastapi.params import Depends
 from fastapi.routing import APIRoute
 from starlette.responses import JSONResponse
-from utils.type import get_return_type as type
+
+from fastapi_tag.base.model import Problem
+from fastapi_tag.utils.type import get_return_type as type
 
 
 class Verb(Enum):

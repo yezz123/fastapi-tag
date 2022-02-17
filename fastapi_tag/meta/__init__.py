@@ -1,3 +1,3 @@
-from meta import metadata
+from fastapi_tag.meta import metadata
 
 __all__ = ["metadata"]

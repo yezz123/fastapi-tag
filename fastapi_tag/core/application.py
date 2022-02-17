@@ -1,11 +1,12 @@
-from base.model import Metadata, Problem
-from core._base import app
 from fastapi import FastAPI, Request
 from fastapi.encoders import jsonable_encoder
 from fastapi.exception_handlers import RequestValidationError
 from fastapi.responses import JSONResponse
-from router.routers import RouteGenerator
 from starlette.exceptions import HTTPException
+
+from fastapi_tag.base.model import Metadata, Problem
+from fastapi_tag.core._base import app
+from fastapi_tag.router.routers import RouteGenerator
 
 
 async def from_validation_error(_request: Request, exc: RequestValidationError):

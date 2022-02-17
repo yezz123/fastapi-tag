@@ -6,10 +6,6 @@ __version__ = "0.0.1"
 
 __author__ = "Yasser Tahiri"
 
-import base
-import core
-import meta
-import router
-import utils
+from fastapi_tag import base, core, meta, router, utils
 
 __all__ = ["base", "core", "meta", "router", "utils"]

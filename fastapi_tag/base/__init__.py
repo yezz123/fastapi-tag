@@ -1,3 +1,3 @@
-from base import model
+from fastapi_tag.base import model
 
 __all__ = ["model"]

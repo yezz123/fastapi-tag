@@ -1,6 +1,7 @@
-from base.model import Metadata
 from fastapi import Request
-from router.routers import Namespace, Resource
+
+from fastapi_tag.base.model import Metadata
+from fastapi_tag.router.routers import Namespace, Resource
 
 app = Namespace(["Generic"])
 
