@@ -1,0 +1,52 @@
+[build-system]
+requires = ["flit"]
+build-backend = "flit.buildapi"
+
+[tool.flit.metadata]
+module = "fastapi_tag"
+dist-name = "fastapi_tag"
+author = "Yasser Tahiri"
+author-email = "yasserth19@gmail.com"
+home-page = "https://github.com/yezz123/fastapi-tag"
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Framework :: FastAPI",
+    "Framework :: AsyncIO",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Internet :: WWW/HTTP :: Session",
+    "Typing :: Typed",
+]
+description-file = "README.md"
+requires-python = ">=3.6"
+requires = [
+    "anyio==3.4.0",
+    "fastapi==0.70.0",
+    "idna==3.3",
+    "pydantic==1.8.2",
+    "sniffio==1.2.0",
+    "starlette==0.16.0",
+    "typing_extensions==4.0.1",
+]
+
+[tool.flit.metadata.requires-extra]
+testing = [
+    "mock==4.0.3",
+    "pytest==6.2.5",
+    "coverage==6.2",
+    "requests==2.26.0",
+    "requests-toolbelt==0.9.1",
+    "pytest-asyncio==0.16.0",
+    "uvicorn==0.15.0",
+    "pre-commit==2.16.0",
+    "asynctest==0.13.0",
+    "bumpversion==0.6.0",
+    "codecov==2.1.12",
+    "pytest-cov==3.0.0",
+]
