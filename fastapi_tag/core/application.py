@@ -12,13 +12,6 @@ from fastapi_tag.router.routers import RouteGenerator
 async def from_validation_error(_request: Request, exc: RequestValidationError):
     """
     from_validation_error function is used to handle validation error.
-
-    Args:
-        _request (Request): Request object
-        exc (RequestValidationError): RequestValidationError object
-
-    Returns:
-        JSONResponse: JSONResponse object
     """
     body = jsonable_encoder(
         Problem(title="Validation error", status=400, detail=exc.errors())
@@ -29,13 +22,6 @@ async def from_validation_error(_request: Request, exc: RequestValidationError):
 async def from_http_exception(_request: Request, exc: HTTPException):
     """
     from_http_exception function is used to handle HTTPException error.
-
-    Args:
-        _request (Request): Request object
-        exc (HTTPException): HTTPException object
-
-    Returns:
-        JSONResponse: JSONResponse object
     """
     problem = Problem(title=exc.detail, status=exc.status_code, detail={})
     body = jsonable_encoder(problem)
@@ -45,18 +31,11 @@ async def from_http_exception(_request: Request, exc: HTTPException):
 class Application(FastAPI):
     """
     Class Application is a FastAPI class that is used to create API application.
-
-    Args:
-        FastAPI object
     """
 
     def __init__(self, root: str, metadata: Metadata, **kwargs):
         """
         __init__ function is used to initialize Application class.
-
-        Args:
-            root (str): API root
-            metadata (Metadata): Metadata object
         """
         self.root = root
         self.metadata = metadata
@@ -80,9 +59,6 @@ class Application(FastAPI):
     def openapi(self):
         """
         openapi function is used to show OpenAPI specification.
-
-        Returns:
-            JSONResponse: JSONResponse object
         """
         openapi = super().openapi()
         if self.metadata.contact:
