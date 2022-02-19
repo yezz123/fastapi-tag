@@ -10,8 +10,6 @@ def read_app_version():
     """Attempts to read the version from the environment, returning 'NA' when it
     fails.  It first looks for the existence of a VERSION file, then tries to
     use git to obtain a tag.
-
-    :returns: A string describing the version.
     """
     return _read_version_from_file() or _read_version_from_git() or "NA"
 
@@ -19,9 +17,6 @@ def read_app_version():
 def _read_version_from_file():
     """
     :returns: A string describing the version.
-
-    Returns:
-        str: The version of the application.
     """
     handle = None
     try:
@@ -39,9 +34,6 @@ def _read_version_from_file():
 def _read_version_from_git():
     """
     :returns: A string describing the version.
-
-    Returns:
-        str: The version of the application.
     """
     try:
         version = (

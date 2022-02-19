@@ -14,15 +14,6 @@ from fastapi_tag.utils.type import get_return_type as type
 class Verb(Enum):
     """
     Enum of HTTP verbs.
-
-    Args:
-        Enum (Enum): Enum of HTTP verbs.
-
-    Returns:
-        Verb: HTTP verb.
-
-    Yields:
-        Verb: HTTP verb.
     """
 
     GET = auto()
@@ -41,9 +32,6 @@ class Verb(Enum):
     def handler_name(self):
         """
         handler_name is the name of the handler function.
-
-        Returns:
-            str: Name of the handler function.
         """
         return self.name.lower()
 
@@ -51,9 +39,6 @@ class Verb(Enum):
 class RouteGenerator(ABC):
     """
     Abstract class for generating routes.
-
-    Args:
-        ABC (ABC): Abstract class.
     """
 
     @abstractmethod
@@ -65,12 +50,6 @@ class RouteGenerator(ABC):
 class Namespace(RouteGenerator):
     """
     Namespace.route is a decorator that adds a route generator to the namespace.
-
-    Args:
-        RouteGenerator (RouteGenerator): Route generator.
-
-    Returns:
-        RouteGenerator: Route generator.
     """
 
     _children: List[RouteGenerator]
@@ -83,11 +62,6 @@ class Namespace(RouteGenerator):
     ):
         """
         __init__ is the constructor for Namespace.
-
-        Args:
-            tags (List[str]): Tags.
-            prefix (Optional[str]): Prefix.
-            dependencies (List[Depends]): Dependencies.
         """
         self._tags = tags
         self._prefix = prefix
@@ -105,9 +79,6 @@ class Namespace(RouteGenerator):
         def decorator(cls):
             """
             decorator is a decorator that adds a route generator to the namespace.
-
-            Returns:
-                RouteGenerator: Route generator.
             """
             self.add(cls(*args, **kwargs))
             return cls
@@ -126,15 +97,6 @@ class Namespace(RouteGenerator):
 class Resource(RouteGenerator):
     """
     _RESPONSES is a dictionary of HTTP status codes and their corresponding response class.
-
-    Args:
-        RouteGenerator (RouteGenerator): Route generator.
-
-    Returns:
-        RouteGenerator: Route generator.
-
-    Yields:
-        RouteGenerator: Route generator.
     """
 
     _RESPONSES = {"4XX": {"model": Problem}}
@@ -147,11 +109,6 @@ class Resource(RouteGenerator):
     ):
         """
         __init__ is the constructor for Resource.
-
-        Args:
-            prefix (Optional[str]): Prefix.
-            tags (Optional[List[str]]): Tags.
-            dependencies (List[Depends]): Dependencies.
         """
         self._prefix = prefix
         self._tags = tags
