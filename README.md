@@ -1,6 +1,11 @@
 # FastAPI Tag
 
-![FastAPI](https://user-images.githubusercontent.com/52716203/155899514-89e7cee7-3c23-4651-94ad-339abb167b7b.png)
+[![Tests](https://github.com/yezz123/fastapi-tag/actions/workflows/tests.yml/badge.svg)](https://github.com/yezz123/fastapi-tag/actions/workflows/tests.yml)
+[![Publish PyPI 🐍](https://github.com/yezz123/fastapi-tag/actions/workflows/release.yml/badge.svg)](https://github.com/yezz123/fastapi-tag/actions/workflows/release.yml)
+[![codecov](https://codecov.io/gh/yezz123/fastapi-tag/branch/main/graph/badge.svg?token=y43lS0Ed2N)](https://codecov.io/gh/yezz123/fastapi-tag)
+[![PyPI](https://badge.fury.io/py/fastapi-tag.svg)](https://badge.fury.io/py/fastapi-tag)
+[![framework](https://img.shields.io/badge/Framework-FastAPI-blue?style)](https://fastapi.tiangolo.com/)
+[![Pypi](https://img.shields.io/pypi/pyversions/fastapi-tag.svg?color=%2334D058)](https://pypi.org/project/fastapi-tag)
 
 <p align="center">
     <em>Documented & Enhance the Metadata of your API ✨</em>
