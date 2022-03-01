@@ -3,7 +3,7 @@
 [![Tests](https://github.com/yezz123/fastapi-tag/actions/workflows/tests.yml/badge.svg)](https://github.com/yezz123/fastapi-tag/actions/workflows/tests.yml)
 [![Publish PyPI 🐍](https://github.com/yezz123/fastapi-tag/actions/workflows/release.yml/badge.svg)](https://github.com/yezz123/fastapi-tag/actions/workflows/release.yml)
 [![codecov](https://codecov.io/gh/yezz123/fastapi-tag/branch/main/graph/badge.svg?token=y43lS0Ed2N)](https://codecov.io/gh/yezz123/fastapi-tag)
-[![PyPI](https://badge.fury.io/py/fastapi-tag.svg)](https://badge.fury.io/py/fastapi-tag)
+[![PyPI version](https://badge.fury.io/py/fastapi_tag.svg)](https://badge.fury.io/py/fastapi_tag)
 [![framework](https://img.shields.io/badge/Framework-FastAPI-blue?style)](https://fastapi.tiangolo.com/)
 [![Pypi](https://img.shields.io/pypi/pyversions/fastapi-tag.svg?color=%2334D058)](https://pypi.org/project/fastapi-tag)
 
