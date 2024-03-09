@@ -2,8 +2,8 @@ from fastapi.testclient import TestClient
 from pydantic import BaseModel
 from starlette.exceptions import HTTPException
 
-from fastapi_tag.base.model import Problem
-from fastapi_tag.router.routers import Namespace, Resource
+from fastapi_tag.model import Problem
+from fastapi_tag.routers import Namespace, Resource
 
 route = Namespace([])
 
@@ -34,8 +34,8 @@ class TestExceptionHandlers:
 
         try:
             Problem(**obj)
-        except:
-            assert False, obj
+        except Exception as e:
+            raise AssertionError(obj) from e
 
     def test_http_exception_returns_problem(self, app):
         app.add(route)
@@ -45,5 +45,5 @@ class TestExceptionHandlers:
 
         try:
             Problem(**obj)
-        except:
-            assert False, obj
+        except Exception as e:
+            raise AssertionError(obj) from e

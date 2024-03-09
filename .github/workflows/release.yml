@@ -1,4 +1,4 @@
-name: Publish PyPI 🐍
+name: Publish
 
 on:
   release:
@@ -13,27 +13,23 @@ jobs:
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: echo "$GITHUB_CONTEXT"
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5
         with:
-          python-version: "3.9"
-      - uses: actions/cache@v2
-        id: cache
+          python-version: "3.10"
+      - name: Install build dependencies
+        run: pip install build
+      - name: check GITHUB_REF matches package version
+        uses: samuelcolvin/check-python-version@v4.1
         with:
-          path: ${{ env.pythonLocation }}
-          key: ${{ runner.os }}-python-${{ env.pythonLocation }}-${{ hashFiles('pyproject.toml') }}-publish
-      - name: Install Flit
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: pip install flit
-      - name: Install Dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: flit install --symlink
+          version_file_path: fastapi_tag/__init__.py
+      - name: Build distribution
+        run: python -m build
       - name: Publish
-        env:
-          FLIT_USERNAME: ${{ secrets.PYPI_USERNAME }}
-          FLIT_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
-        run: flit publish
+        uses: pypa/gh-action-pypi-publish@v1.8.14
+        with:
+          password: ${{ secrets.PYPI_API_TOKEN }}
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}

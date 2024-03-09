@@ -1,52 +1,135 @@
 [build-system]
-requires = ["flit"]
-build-backend = "flit.buildapi"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
-[tool.flit.metadata]
-module = "fastapi_tag"
-dist-name = "fastapi_tag"
-author = "Yasser Tahiri"
-author-email = "yasserth19@gmail.com"
-home-page = "https://github.com/yezz123/fastapi-tag"
+[project]
+name = "fastapi_tag"
+description = "Module for fastapi help to ensure the Metadata of the API"
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+authors = [
+    { name = "Yasser Tahiri", email = "hello@yezz.me" },
+]
+keywords = [
+    "FastAPI",
+    "Pydantic",
+    "Metadata",
+    "OpenAPI",
+    "RESTful",
+]
+
 classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
     "Framework :: FastAPI",
     "Framework :: AsyncIO",
+    "Framework :: Pydantic",
+    "Framework :: Pydantic :: 2",
     "Programming Language :: Python",
-    "Programming Language :: Python :: 3.6",
-    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Software Development :: Libraries :: Python Modules",
     "Topic :: Internet :: WWW/HTTP :: Session",
     "Typing :: Typed",
 ]
-description-file = "README.md"
-requires-python = ">=3.6"
-requires = [
-    "anyio==3.4.0",
-    "fastapi==0.70.0",
-    "idna==3.3",
-    "pydantic==1.8.2",
-    "sniffio==1.2.0",
-    "starlette==0.16.0",
-    "typing_extensions==4.0.1",
+
+dependencies = [
+    "fastapi >=0.100.0,<0.111.0",
+    "pydantic >=2.0.0,<2.6.4",
+    "pydantic-settings >=2.1.0",
 ]
 
-[tool.flit.metadata.requires-extra]
-testing = [
-    "mock==4.0.3",
-    "pytest==6.2.5",
-    "coverage==6.2",
-    "requests==2.26.0",
-    "requests-toolbelt==0.9.1",
-    "pytest-asyncio==0.16.0",
-    "uvicorn==0.15.0",
-    "pre-commit==2.16.0",
-    "asynctest==0.13.0",
-    "bumpversion==0.6.0",
-    "codecov==2.1.12",
-    "pytest-cov==3.0.0",
+dynamic = ["version"]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[project.urls]
+Homepage = "https://github.com/yezz123/fastapi-tag"
+Funding = 'https://github.com/sponsors/yezz123'
+
+[project.optional-dependencies]
+lint = [
+    "pre-commit==3.6.2",
+    "mypy==1.9.0",
+    "ruff==0.3.1",
+]
+test = [
+    "pytest==8.0.2",
+    "pytest-asyncio == 0.23.5.post1",
+    "pytest-cov==4.1.0",
+    "python-decouple",
+    "pytest-pretty==1.2.0",
+    "httpx==0.27.0",
+]
+
+[tool.hatch.version]
+path = "fastapi_tag/__init__.py"
+
+
+[tool.ruff.lint]
+mccabe = { max-complexity = 14 }
+select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "I",  # isort
+    "C",  # flake8-comprehensions
+    "B",  # flake8-bugbear
+]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]
+
+[tool.ruff.lint.isort]
+known-third-party = ["pydantic"]
+
+[tool.ruff.lint.pyupgrade]
+keep-runtime-typing = true
+
+[tool.coverage.run]
+source = ["fastapi_tag"]
+branch = true
+context = '${CONTEXT}'
+
+[tool.coverage.paths]
+source = [
+    'fastapi_tag/',
+    '/Users/runner/work/fastapi_tag/fastapi_tag/fastapi_tag/',
+    'D:\a\fastapi_tag\fastapi_tag\fastapi_tag',
+]
+
+[tool.coverage.report]
+precision = 2
+exclude_lines = [
+    'pragma: no cover',
+    'raise NotImplementedError',
+    'if TYPE_CHECKING:',
+    '@overload',
+]
+
+[tool.mypy]
+strict = true
+no_implicit_optional= true
+plugins = 'pydantic.mypy'
+
+
+[tool.pytest.ini_options]
+testpaths = 'tests'
+log_cli = "1"
+log_cli_level = "INFO"
+log_cli_format = "%(asctime)s [%(levelname)8s] %(message)s (%(filename)s:%(lineno)s)"
+log_cli_date_format= "%Y-%m-%d %H:%M:%S"
+asyncio_mode= "auto"
+filterwarnings = [
+    'error',
+    'ignore::DeprecationWarning',
 ]

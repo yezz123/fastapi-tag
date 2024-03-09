@@ -4,9 +4,9 @@ from fastapi.exception_handlers import RequestValidationError
 from fastapi.responses import JSONResponse
 from starlette.exceptions import HTTPException
 
-from fastapi_tag.base.model import Metadata, Problem
-from fastapi_tag.core._base import app
-from fastapi_tag.router.routers import RouteGenerator
+from fastapi_tag.api import app
+from fastapi_tag.model import Metadata, Problem
+from fastapi_tag.routers import RouteGenerator
 
 
 async def from_validation_error(_request: Request, exc: RequestValidationError):
@@ -53,6 +53,9 @@ class Application(FastAPI):
         self.add(app)
 
     def add(self, route_generator: RouteGenerator) -> None:
+        """
+        add function is used to add a route generator to the application.
+        """
         for route in route_generator.routes(prefix=self.root):
             self.routes.append(route)
 
