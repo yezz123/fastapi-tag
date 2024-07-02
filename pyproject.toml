@@ -43,7 +43,7 @@ classifiers = [
 
 dependencies = [
     "fastapi >=0.100.0,<0.112.0",
-    "pydantic >=2.0.0,<2.7.5",
+    "pydantic >=2.8.0,<2.8.1",
     "pydantic-settings >=2.1.0",
 ]
 
@@ -59,8 +59,8 @@ Funding = 'https://github.com/sponsors/yezz123'
 [project.optional-dependencies]
 lint = [
     "pre-commit==3.7.1",
-    "mypy==1.10.0",
-    "ruff==0.4.10",
+    "mypy==1.10.1",
+    "ruff==0.5.0",
 ]
 test = [
     "pytest==8.2.2",
